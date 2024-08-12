@@ -1,0 +1,5 @@
+docker-compose.yaml
+talos_cache.db
+/tmp
+deployment.yaml
+.DS_Store

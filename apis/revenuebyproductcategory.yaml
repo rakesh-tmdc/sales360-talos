@@ -1,0 +1,8 @@
+urlPath: /revenue/product
+description: Get total revenue by product category
+response : 
+    - name: total_revenue
+      description: revenue genrated during that time
+    - name : category
+      description: product category
+source: sales360lens

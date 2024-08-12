@@ -1,0 +1,10 @@
+name: sales360
+description: A talos app for AI agent
+version: 0.0.1
+logLevel: DEBUG
+auth:
+    heimdallUrl: https://liberal-donkey.dataos.app/heimdall
+sources:
+    - name: sales360lens 
+      type: lens
+      lensName: 'public:sales360'    

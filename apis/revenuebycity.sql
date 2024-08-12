@@ -1,0 +1,1 @@
+select sales.total_revenue, account.city from sales left join account on sales.__joinField = account.__joinField

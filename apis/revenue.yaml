@@ -1,0 +1,11 @@
+urlPath: /revenue
+description: Get total revenue by week,month,year
+request:
+  - fieldName: time_period
+    fieldIn: query
+response : 
+    - name: total_revenue
+      description: revenue genrated during that time
+    - name : time_period
+      description: Time period of revenue Week,Month,Year  
+source: sales360lens

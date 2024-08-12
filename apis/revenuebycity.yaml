@@ -1,0 +1,8 @@
+urlPath: /revenue/city
+description: Get total revenue by city
+response : 
+    - name: total_revenue
+      description: revenue genrated by city
+    - name : city
+      description: name of city
+source: sales360lens
