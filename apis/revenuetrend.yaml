@@ -1,0 +1,11 @@
+urlPath: /revenue/trend
+description: Get revenue trend
+# request:
+#   - fieldName: day
+#     fieldIn: query
+# response : 
+#     - name: total_revenue
+#       description: revenue genrated during that time
+#     - name : time_period
+#       description: Time period of revenue Week,Month,Year  
+source: sales360lens
