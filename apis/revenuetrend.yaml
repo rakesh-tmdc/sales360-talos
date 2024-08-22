@@ -3,4 +3,7 @@ description: Get revenue trend
 source: sales360
 cache :
     - cacheTableName: 'sales_cache'
-      source: sales360  
+      source: sales360
+      options: 
+        offset: 0
+        limit: 1000  
