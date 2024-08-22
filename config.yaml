@@ -4,6 +4,7 @@ version: 0.0.1
 logLevel: DEBUG
 auth:
     heimdallUrl: https://liberal-donkey.dataos.app/heimdall
+cachePath: /tmp    
 sources:
     - name: sales360
       type: lens
