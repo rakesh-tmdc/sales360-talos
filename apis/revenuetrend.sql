@@ -17,5 +17,5 @@ GROUP BY
     day
 ORDER BY 
     day ASC;
-{% end_cache %}    
+{% endcache %}    
 
