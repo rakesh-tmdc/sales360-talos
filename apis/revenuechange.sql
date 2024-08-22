@@ -7,7 +7,7 @@ WITH last_invoice AS (
 ),
 revenue_last_invoice_date AS (
     SELECT 
-        total_revenue AS revenue
+        SUM(total_revenue) AS revenue
     FROM 
         sales_cache1, last_invoice
     WHERE 
@@ -15,7 +15,7 @@ revenue_last_invoice_date AS (
 ),
 revenue_previous_day AS (
     SELECT 
-        total_revenue AS revenue
+        SUM(total_revenue) AS revenue
     FROM 
         sales_cache1, last_invoice
     WHERE 
@@ -23,7 +23,7 @@ revenue_previous_day AS (
 )
 SELECT 
     CASE
-        WHEN revenue_previous_day.revenue = 0 THEN 0
+        WHEN revenue_previous_day.revenue = 0 THEN NULL
         ELSE ROUND(((revenue_last_invoice_date.revenue - revenue_previous_day.revenue) / revenue_previous_day.revenue) * 100, 2)
     END AS percentage_change
 FROM 
