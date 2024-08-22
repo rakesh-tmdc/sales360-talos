@@ -1,1 +1,1 @@
-SELECT measure(total_revenue), invoice_date FROM sales;
+SELECT total_revenue , invoice_date FROM sales;
