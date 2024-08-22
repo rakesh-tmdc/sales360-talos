@@ -8,4 +8,4 @@ response :
       description: revenue genrated during that time
     - name : time_period
       description: Time period of revenue Week,Month,Year  
-source: sales360lens
+source: sales360

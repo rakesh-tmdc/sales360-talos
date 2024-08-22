@@ -5,4 +5,4 @@ response :
       description: revenue genrated during that time
     - name : category
       description: product category
-source: sales360lens
+source: sales360

@@ -5,6 +5,7 @@ logLevel: DEBUG
 auth:
     heimdallUrl: https://liberal-donkey.dataos.app/heimdall
 sources:
-    - name: sales360lens 
+    - name: sales360
       type: lens
       lensName: 'public:sales360'    
+      
