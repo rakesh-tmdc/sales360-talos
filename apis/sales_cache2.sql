@@ -1,1 +1,1 @@
-SELECT * FROM sales LIMIT ${LIMIT} OFFSET ${OFFSET};
+SELECT * FROM sales;

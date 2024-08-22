@@ -3,7 +3,4 @@ description: Get revenue change
 source: sales360
 cache :
     - cacheTableName: 'sales_cache1'
-      source: sales360
-      options: 
-        offset: 0
-        limit: 1000  
+      source: sales360  
