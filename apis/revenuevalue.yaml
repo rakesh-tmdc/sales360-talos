@@ -1,0 +1,6 @@
+urlPath: /revenue/value
+description: Get revenue value of the day
+source: sales360
+cache :
+    - cacheTableName: 'sales_cache2'
+      source: sales360  

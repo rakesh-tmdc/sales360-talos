@@ -23,7 +23,7 @@ revenue_previous_day AS (
 )
 SELECT 
     CASE
-        WHEN revenue_previous_day.revenue = 0 THEN NULL
+        WHEN revenue_previous_day.revenue = 0 THEN 0
         ELSE ROUND(((revenue_last_invoice_date.revenue - revenue_previous_day.revenue) / revenue_previous_day.revenue) * 100, 2)
     END AS percentage_change
 FROM 
