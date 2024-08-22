@@ -2,5 +2,5 @@ urlPath: /revenue/trend
 description: Get revenue trend
 source: sales360
 cache :
-    - cacheTableName: 'sales_cache1'
+    - cacheTableName: 'sales_cache'
       source: sales360  
