@@ -7,7 +7,7 @@ WITH last_invoice AS (
 ),
 revenue_last_invoice_date AS (
     SELECT 
-        SUM(total_revenue) AS revenue
+        total_revenue AS revenue
     FROM 
         sales_cache1, last_invoice
     WHERE 
@@ -15,7 +15,7 @@ revenue_last_invoice_date AS (
 ),
 revenue_previous_day AS (
     SELECT 
-        SUM(total_revenue) AS revenue
+        total_revenue AS revenue
     FROM 
         sales_cache1, last_invoice
     WHERE 
