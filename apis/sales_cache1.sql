@@ -1,1 +1,1 @@
-SELECT total_revenue , invoice_date FROM sales;
+SELECT measure(total_revenue) as total_revenue , invoice_date FROM sales group by 2;
