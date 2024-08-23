@@ -1,5 +1,7 @@
 name: sales360
-description: A talos app for AI agent
+description: |
+  ## Talos App - Demo of Lens Integration
+  The **Talos App** is designed specifically for **demonstration purposes** of the **Lens** platform. This app serves as a showcase, allowing users to **experience** and **consume APIs** in an intuitive and user-friendly manner.
 version: 0.0.1
 logLevel: DEBUG
 auth:
