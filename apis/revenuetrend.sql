@@ -7,7 +7,7 @@ WITH last_invoice AS (
 )
 SELECT 
     date_trunc('day', invoice_date) AS day,
-    SUM(total_revenue) AS revenue
+    total_revenue AS revenue
 FROM 
     sales_cache, last_invoice
 WHERE 
