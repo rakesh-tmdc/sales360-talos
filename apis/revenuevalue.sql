@@ -6,7 +6,7 @@ WITH last_invoice AS (
         sales_cache2
 )
 SELECT 
-    measure(total_revenue) AS total_revenue
+    SUM(total_revenue) AS total_revenue
 FROM 
     sales_cache2, last_invoice
 WHERE 
