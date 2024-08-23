@@ -4,6 +4,5 @@ response :
     - name: total_revenue
       description: revenue genrated by city
     - name : city
-      description: name of city
-      
+      description: name of city      
 source: sales360
