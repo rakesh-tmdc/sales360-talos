@@ -1,6 +1,8 @@
 urlPath: /revenue/value
 description: Get revenue value of the day
 source: sales360
+tags :
+ - metrics  
 cache :
     - cacheTableName: 'sales_cache2'
       source: sales360  
