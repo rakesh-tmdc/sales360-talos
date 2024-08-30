@@ -1,14 +1,15 @@
+{% cache %}
 WITH last_invoice AS (
     SELECT 
         MAX(invoice_date) AS last_invoice_date
     FROM 
-        sales
+        sales_cache
 ),
 revenue_last_invoice_date AS (
     SELECT 
         total_revenue AS revenue
     FROM 
-        sales, last_invoice
+        sales_cache, last_invoice
     WHERE 
         invoice_date = last_invoice.last_invoice_date
 ),
@@ -16,7 +17,7 @@ revenue_previous_day AS (
     SELECT 
         total_revenue AS revenue
     FROM 
-        sales, last_invoice
+        sales_cache, last_invoice
     WHERE 
         invoice_date = last_invoice.last_invoice_date - INTERVAL '1 day'
 ),
@@ -25,7 +26,7 @@ revenue_trend AS (
         date_trunc('day', invoice_date) AS day,
         SUM(total_revenue) AS revenue
     FROM 
-        sales, last_invoice
+        sales_cache, last_invoice
     WHERE 
         invoice_date >= last_invoice.last_invoice_date - INTERVAL '7 days'
         AND invoice_date <= last_invoice.last_invoice_date
@@ -52,3 +53,5 @@ SELECT
     revenue
 FROM 
     revenue_trend;
+{% endcache %}
+
