@@ -9,5 +9,5 @@ response :
     - name : time_period
       description: Time period of revenue Week,Month,Year  
 tags :
- - Data Exchange      
+ - revenue   
 source: sales360

@@ -6,5 +6,5 @@ response :
     - name : city
       description: name of city  
 tags :
- - Data Exchange                
+ - revenue              
 source: sales360

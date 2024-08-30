@@ -6,5 +6,5 @@ response :
     - name : category
       description: product category
 tags :
- - Data Exchange            
+ - revenue          
 source: sales360
