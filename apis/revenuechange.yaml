@@ -1,5 +1,7 @@
 urlPath: /revenue/change
 description: Get revenue change
+tags :
+ - Data Exchange      
 source: sales360
 cache :
     - cacheTableName: 'sales_cache1'
