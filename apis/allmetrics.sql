@@ -52,11 +52,11 @@ FROM
 
 {% endcache %}
 {% endreq %}
-{% set var =  {
-        "headers": { "Authorization" : "Bearer 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" },
-        "body" : { "inputs" : summary.value()[0] }
-    } 
-%}
+-- {% set var =  {
+--         "headers": { "Authorization" : "Bearer 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" },
+--         "body" : { "inputs" : summary.value()[0] }
+--     } 
+-- %}
 
--- The source data for "huggingface_table_question_answering" needs to be an array of objects.
-SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/facebook/bart-large-cnn', method = 'POST') }}
+
+-- SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/facebook/bart-large-cnn', method = 'POST') }}
