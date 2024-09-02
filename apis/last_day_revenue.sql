@@ -1,6 +1,5 @@
-SELECT 
-    measure(total_revenue)
-FROM 
-    sales
-WHERE 
-    invoice_date = (SELECT last_invoice_date FROM last_invoice) - INTERVAL '1 day'
+ SELECT 
+        measure(total_revenue) as revenue
+        MAX(invoice_date) AS last_invoice_date
+    FROM 
+        sales
