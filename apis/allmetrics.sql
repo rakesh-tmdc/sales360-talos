@@ -52,11 +52,3 @@ FROM
 
 {% endcache %}
 {% endreq %}
--- {% set var =  {
---         "headers": { "Authorization" : "Bearer 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" },
---         "body" : { "inputs" : summary.value()[0] }
---     } 
--- %}
-
-
--- SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/facebook/bart-large-cnn', method = 'POST') }}
