@@ -50,13 +50,11 @@ SELECT
 FROM 
     revenue_last_7_days;
 
-
-
 {% endcache %}
 {% endreq %}
 {% set var =  {
         "headers": { "Authorization" : "Bearer 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" },
-        "body" : { "inputs" : summary.value() }
+        "body" : { "inputs" : summary.value()[0] }
     } 
 %}
 
