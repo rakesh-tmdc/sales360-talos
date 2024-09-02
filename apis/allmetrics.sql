@@ -46,9 +46,10 @@ SELECT
                  (SELECT revenue FROM revenue_previous_day) * 100
         END, 2
     ) AS percentage_change,
-    ARRAY_AGG(revenue ORDER BY day ASC) AS trend_last_7_days
+    LIST(revenue ORDER BY day ASC) AS trend_last_7_days
 FROM 
     revenue_last_7_days;
+
 
 
 {% endcache %}
