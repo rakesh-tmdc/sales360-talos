@@ -60,7 +60,7 @@ FROM
 } %}
 {% set var =  {
         "headers": { "Authorization" : "Bearer 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" },
-        "body" : { "inputs" : query_result }
+        "body" : { "inputs" : query_result | string |list }
     } 
 %}
 
