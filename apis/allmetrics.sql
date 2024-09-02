@@ -1,5 +1,6 @@
-{% cache %}
 {% req summary %}
+{% cache %}
+
 WITH last_invoice AS (
     SELECT 
         MAX(invoice_date) AS last_invoice_date
@@ -46,9 +47,9 @@ SELECT
         END, 2
     ) AS percentage_change,
     (SELECT trend_last_7_days FROM revenue_last_7_days) AS trend_last_7_days;
-{% endreq %}
-{% endcache %}
 
+{% endcache %}
+{% endreq %}
 {% set var =  {
         "headers": { "Authorization" : "Bearer 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" },
         "body" : { "inputs" : summary.value() }
