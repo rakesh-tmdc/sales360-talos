@@ -10,5 +10,7 @@ cachePath: /tmp
 sources:
     - name: sales360
       type: lens
-      lensName: 'public:sales360'    
+      lensName: 'public:sales360'
+    - name : duckdb 
+      type : duckdb      
       

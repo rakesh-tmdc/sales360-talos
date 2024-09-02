@@ -1,0 +1,8 @@
+urlPath: /revenue/trend
+description: Get revenue trend
+tags :
+ - metrics  
+source: sales360   
+cache :
+    - cacheTableName: 'sales_cache3'
+      source: sales360  

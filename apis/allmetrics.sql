@@ -1,4 +1,5 @@
 {% cache %}
+{% req summary %}
 WITH last_invoice AS (
     SELECT 
         MAX(invoice_date) AS last_invoice_date
@@ -23,12 +24,17 @@ revenue_previous_day AS (
 ),
 revenue_last_7_days AS (
     SELECT 
-        SUM(total_revenue) AS total_revenue_7_days
-    FROM 
-        sales_cache
-    WHERE 
-        invoice_date >= (SELECT last_invoice_date FROM last_invoice) - INTERVAL '7 days'
-        AND invoice_date <= (SELECT last_invoice_date FROM last_invoice)
+    date_trunc('day', invoice_date) AS day,
+    SUM(total_revenue) AS revenue
+FROM 
+    sales_cache, last_invoice
+WHERE 
+    invoice_date >= last_invoice.last_invoice_date - INTERVAL '7 days'
+    AND invoice_date <= last_invoice.last_invoice_date
+GROUP BY 
+    day
+ORDER BY 
+    day ASC;
 )
 SELECT 
     (SELECT revenue FROM revenue_last_invoice_date) AS total_revenue_last_invoice_date,
@@ -39,7 +45,15 @@ SELECT
                  (SELECT revenue FROM revenue_previous_day) * 100
         END, 2
     ) AS percentage_change,
-    (SELECT total_revenue_7_days FROM revenue_last_7_days) AS total_revenue_7_days;
-
+    (SELECT trend_last_7_days FROM revenue_last_7_days) AS trend_last_7_days;
+{% endreq %}
 {% endcache %}
 
+{% set var =  {
+        "headers": { "Authorization" : "Bearer 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" },
+        "body" : { "inputs" : summary.value() }
+    } 
+%}
+
+-- The source data for "huggingface_table_question_answering" needs to be an array of objects.
+SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/facebook/bart-large-cnn', method = 'POST') }}
