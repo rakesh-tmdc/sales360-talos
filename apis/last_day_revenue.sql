@@ -3,3 +3,4 @@
         MAX(invoice_date) AS last_invoice_date
     FROM 
         sales
+    group by 2;    
