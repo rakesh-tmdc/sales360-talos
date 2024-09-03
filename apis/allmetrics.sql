@@ -47,7 +47,7 @@ SELECT
                 ELSE (MAX(revenue_last_invoice_date.revenue) - MAX(revenue_previous_day.revenue)) /
                      MAX(revenue_previous_day.revenue) * 100
             END, 2
-        ), 'not available'
+        )::VARCHAR, 'not available'
     ) ||
     '. The total revenue of the last invoice date is ' ||
     CAST(MAX(revenue_last_invoice_date.revenue) AS VARCHAR) || 
