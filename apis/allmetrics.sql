@@ -63,7 +63,7 @@ FROM
 
 {% set var =  {
         "headers": { "Authorization" : "Bearer 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" },
-        "body" : { "inputs" : summary.value()[0].summary | string | list}
+        "body" : { "inputs" : summary.value()[0].summary | string}
     } 
 %}
 
