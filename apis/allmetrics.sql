@@ -43,19 +43,19 @@ SELECT
     COALESCE(
         ROUND(
             CASE
-                WHEN (SELECT SUM(total_revenue) FROM revenue_previous_day) = 0 THEN NULL
-                ELSE (
-                    (SELECT SUM(total_revenue) FROM revenue_last_invoice_date) - 
-                    (SELECT SUM(total_revenue) FROM revenue_previous_day)
-                ) / (SELECT SUM(total_revenue) FROM revenue_previous_day) * 100
+                WHEN revenue_previous_day.revenue = 0 THEN NULL
+                ELSE (revenue_last_invoice_date.revenue - revenue_previous_day.revenue) /
+                     revenue_previous_day.revenue * 100
             END, 2
         ), 'not available'
     ) ||
     '. The total revenue of the last invoice date is ' ||
-    CAST((SELECT SUM(total_revenue) FROM revenue_last_invoice_date) AS VARCHAR) || 
+    CAST(revenue_last_invoice_date.revenue AS VARCHAR) || 
     '.' AS summary
 FROM 
-    revenue_last_7_days;
+    revenue_last_7_days,
+    revenue_last_invoice_date,
+    revenue_previous_day;
 
 
 {% endcache %}
