@@ -43,19 +43,20 @@ SELECT
     COALESCE(
         ROUND(
             CASE
-                WHEN revenue_previous_day.revenue = 0 THEN NULL
-                ELSE (revenue_last_invoice_date.revenue - revenue_previous_day.revenue) /
-                     revenue_previous_day.revenue * 100
+                WHEN MAX(revenue_previous_day.revenue) = 0 THEN NULL
+                ELSE (MAX(revenue_last_invoice_date.revenue) - MAX(revenue_previous_day.revenue)) /
+                     MAX(revenue_previous_day.revenue) * 100
             END, 2
         ), 'not available'
     ) ||
     '. The total revenue of the last invoice date is ' ||
-    CAST(revenue_last_invoice_date.revenue AS VARCHAR) || 
+    CAST(MAX(revenue_last_invoice_date.revenue) AS VARCHAR) || 
     '.' AS summary
 FROM 
     revenue_last_7_days,
     revenue_last_invoice_date,
     revenue_previous_day;
+
 
 {% endcache %}
 {% endreq %}
