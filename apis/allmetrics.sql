@@ -35,32 +35,28 @@ revenue_last_7_days AS (
         day
     ORDER BY 
         day ASC
-),
-formatted_data AS (
-    SELECT
-        (SELECT revenue FROM revenue_last_invoice_date) AS total_revenue_last_invoice_date,
-        ROUND(
-            CASE
-                WHEN (SELECT revenue FROM revenue_previous_day) = 0 THEN NULL
-                ELSE ((SELECT revenue FROM revenue_last_invoice_date) - (SELECT revenue FROM revenue_previous_day)) /
-                     (SELECT revenue FROM revenue_previous_day) * 100
-            END, 2
-        ) AS percentage_change,
-        LIST(revenue ORDER BY day ASC) AS trend_last_7_days
-    FROM 
-        revenue_last_7_days
 )
 SELECT
     'The trend of the last 7 days is ' || 
     STRING_AGG(CAST(revenue AS VARCHAR), ', ' ORDER BY day ASC) || 
     '. The percentage change is ' ||
-    COALESCE(CAST(percentage_change AS VARCHAR), 'not available') ||
+    COALESCE(
+        ROUND(
+            CASE
+                WHEN (SELECT SUM(total_revenue) FROM revenue_previous_day) = 0 THEN NULL
+                ELSE (
+                    (SELECT SUM(total_revenue) FROM revenue_last_invoice_date) - 
+                    (SELECT SUM(total_revenue) FROM revenue_previous_day)
+                ) / (SELECT SUM(total_revenue) FROM revenue_previous_day) * 100
+            END, 2
+        ), 'not available'
+    ) ||
     '. The total revenue of the last invoice date is ' ||
-    CAST(total_revenue_last_invoice_date AS VARCHAR) || 
-    '.'
-AS summary
+    CAST((SELECT SUM(total_revenue) FROM revenue_last_invoice_date) AS VARCHAR) || 
+    '.' AS summary
 FROM 
-    formatted_data;
+    revenue_last_7_days;
+
 
 {% endcache %}
 {% endreq %}
