@@ -65,7 +65,7 @@ FROM
 {% endcache %}
 {% endreq %}
 {% set var =  {
-        "headers": { "Authorization" : "Bearer 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" },
+        "headers": { "Authorization" : "Bearer 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" },
         "body" : { "inputs" : summary.value() | string |list }
     } 
 %}
