@@ -62,7 +62,7 @@ FROM
 {% endreq %}
 {% set var =  {
         "headers": { "Authorization" : "Bearer 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" },
-        "body" : { "inputs" : summary.value() | string |list }
+        "body" : { "inputs" : summary.value() }
     } 
 %}
 
