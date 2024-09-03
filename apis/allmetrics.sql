@@ -36,9 +36,9 @@ revenue_last_7_days AS (
     ORDER BY 
         day ASC
 )
-SELECT
+SELECT 
     'The trend of the last 7 days is ' || 
-    STRING_AGG(CAST(revenue AS VARCHAR), ', ' ORDER BY day ASC) || 
+    STRING_AGG(CAST(revenue_last_7_days.revenue AS VARCHAR), ', ' ORDER BY revenue_last_7_days.day ASC) || 
     '. The percentage change is ' ||
     COALESCE(
         ROUND(
@@ -56,7 +56,6 @@ FROM
     revenue_last_7_days,
     revenue_last_invoice_date,
     revenue_previous_day;
-
 
 {% endcache %}
 {% endreq %}
