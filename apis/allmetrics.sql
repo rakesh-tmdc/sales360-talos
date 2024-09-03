@@ -60,3 +60,12 @@ FROM
 
 {% endcache %}
 {% endreq %}
+
+{% set var =  {
+        "headers": { "Authorization" : "Bearer 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" },
+        "body" : { "inputs" : summary.value()[0].summary | string | list}
+    } 
+%}
+
+
+SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/gpt2', method = 'POST') }}
