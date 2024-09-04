@@ -62,23 +62,21 @@ FROM
 
 {% set var =  {
         "headers": { "Authorization" : "Bearer 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" },
-        "body" : { "inputs" : "Generate a summary based on the input provided 
-   vaule: 20136,
-   change: 0.12,
-   trend:
-     117816.0,
-     43284.0,
-     53514.0,
-     75294.0,
-     85902.0,
-     7692.0,
-     20136.0
-   ,
-Where value is the total revenue generated 
-change is the percentage change in the revenue from last day of invoive to previous day of invoice
-trend shows the amount of revenue generated in the last seven days "}
+        "body" : { "inputs" : "You are an AI analyst tasked with providing a concise summary of metric trends. You will be given information about a specific metric, and your job is to analyze the data and provide a brief, insightful summary focusing on any notable trends, spikes, or anomalies. Your summary should be approximately 2-3 sentences long and written in a clear, professional tone.
+Here's the data for analysis:
+
+Metric Name: {Total Revenue}
+Data Product: {Revenue}
+Domain: {Sales}
+Use cases: {Assess financial performance, Identify sales trends, Evaluate the effectiveness of marketing campaigns}
+Current value: {$20,136}
+Time granularity: {Daily}
+Last value timestamp: Aug 14, 2024
+Recent trend (7 days): {[117,816, 43,284, 53,514, 75,294, 85,902, 7,692, 20,136]}
+
+Please provide a concise summary of the metric's performance, highlighting any significant trends, spikes, or anomalies along with the dates when they occurred. Focus on the current value, the change from the previous period, and the recent trend within the specified date range. If relevant, briefly mention how this might impact the stated use cases."}
     } 
 %}
 
 
-SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/facebook/bart-large-cnn', method = 'POST') }}
+SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/facebook/bart-large-cnn', method = 'POST') }} as result
