@@ -38,23 +38,22 @@ revenue_last_7_days AS (
 )
 SELECT 
     'Can you summarize the metric with current value is ' || 
-    CAST(revenue_last_invoice_date.revenue AS VARCHAR) || 
+    CAST(ANY_VALUE(revenue_last_invoice_date.revenue) AS VARCHAR) || 
     ', it has changed ' ||
     COALESCE(
         CASE
-            WHEN revenue_previous_day.revenue = 0 THEN 'not available'
+            WHEN ANY_VALUE(revenue_previous_day.revenue) = 0 THEN 'not available'
             ELSE CAST(ROUND(
-                (revenue_last_invoice_date.revenue - revenue_previous_day.revenue) /
-                revenue_previous_day.revenue * 100, 2) AS VARCHAR)
+                (ANY_VALUE(revenue_last_invoice_date.revenue) - ANY_VALUE(revenue_previous_day.revenue)) /
+                ANY_VALUE(revenue_previous_day.revenue) * 100, 2) AS VARCHAR)
         END, 'not available'
     ) ||
     '% from the last captured calculation. Overall its trend had been [' ||
     STRING_AGG(CAST(revenue_last_7_days.revenue AS VARCHAR), ', ' ORDER BY revenue_last_7_days.day ASC) ||
     '].' AS summary
 FROM 
-    revenue_last_7_days,
-    revenue_last_invoice_date,
-    revenue_previous_day;
+    revenue_last_7_days;
+
 
 
 {% endcache %}
