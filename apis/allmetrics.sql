@@ -67,4 +67,4 @@ FROM
 %}
 
 
-SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/gpt2', method = 'POST') }}
+SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/meta-llama/Meta-Llama-3.1-8B-Instruct', method = 'POST') }}
