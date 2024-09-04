@@ -62,7 +62,21 @@ FROM
 
 {% set var =  {
         "headers": { "Authorization" : "Bearer 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" },
-        "body" : { "inputs" : "The total revenue for the last invoice date is 20,136. The percentage change from the last recorded value is not available. The revenue trend over the last 7 days shows significant fluctuations, with the following historical values: 117,816, 43,284, 53,514, 75,294, 85,902, 7,692, and 20,136. The trend indicates a sharp decline from an initial high value of 117,816 to the latest value of 20,136, with notable decreases and fluctuations in between. Please provide a summary."}
+        "body" : { "inputs" : "Generate a summary based on the input provided 
+   vaule: 20136,
+   change: 0.12,
+   trend:
+     117816.0,
+     43284.0,
+     53514.0,
+     75294.0,
+     85902.0,
+     7692.0,
+     20136.0
+   ,
+Where value is the total revenue generated 
+change is the percentage change in the revenue from last day of invoive to previous day of invoice
+trend shows the amount of revenue generated in the last seven days "}
     } 
 %}
 
