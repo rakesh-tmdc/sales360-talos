@@ -67,4 +67,4 @@ FROM
 %}
 
 
-SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/Falconsai/text_summarization', method = 'POST') }}
+SELECT {{ var |rest_api(url='https://api-inference.huggingface.co/models/facebook/bart-large-cnn', method = 'POST') }}
