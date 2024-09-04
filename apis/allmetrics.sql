@@ -37,21 +37,20 @@ revenue_last_7_days AS (
         day ASC
 )
 SELECT 
-    'The trend of the last 7 days is ' || 
-    STRING_AGG(CAST(revenue_last_7_days.revenue AS VARCHAR), ', ' ORDER BY revenue_last_7_days.day ASC) || 
-    '. The percentage change is ' ||
+    'Can you summarize the metric with current value is ' || 
+    CAST(revenue_last_invoice_date.revenue AS VARCHAR) || 
+    ', it has changed ' ||
     COALESCE(
-        ROUND(
-            CASE
-                WHEN MAX(revenue_previous_day.revenue) = 0 THEN NULL
-                ELSE (MAX(revenue_last_invoice_date.revenue) - MAX(revenue_previous_day.revenue)) /
-                     MAX(revenue_previous_day.revenue) * 100
-            END, 2
-        )::VARCHAR, 'not available'
+        CASE
+            WHEN revenue_previous_day.revenue = 0 THEN 'not available'
+            ELSE CAST(ROUND(
+                (revenue_last_invoice_date.revenue - revenue_previous_day.revenue) /
+                revenue_previous_day.revenue * 100, 2) AS VARCHAR)
+        END, 'not available'
     ) ||
-    '. The total revenue of the last invoice date is ' ||
-    CAST(MAX(revenue_last_invoice_date.revenue) AS VARCHAR) || 
-    '.' AS summary
+    '% from the last captured calculation. Overall its trend had been [' ||
+    STRING_AGG(CAST(revenue_last_7_days.revenue AS VARCHAR), ', ' ORDER BY revenue_last_7_days.day ASC) ||
+    '].' AS summary
 FROM 
     revenue_last_7_days,
     revenue_last_invoice_date,
