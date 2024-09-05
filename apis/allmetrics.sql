@@ -1,6 +1,5 @@
 {% req summary %}
-{% cache %}
-WITH last_invoice AS (
+{% cache %}WITH last_invoice AS (
     SELECT 
         MAX(invoice_date) AS last_invoice_date
     FROM 
@@ -37,25 +36,19 @@ revenue_last_7_days AS (
         day ASC
 )
 SELECT 
-    'Can you summarize the metric with current value is ' || 
-    CAST(MAX(revenue_last_invoice_date.revenue) AS VARCHAR) || 
-    ', it has changed ' ||
-    COALESCE(
+    MAX(revenue_last_invoice_date.revenue) AS value,
+    ROUND(
         CASE
-            WHEN MAX(revenue_previous_day.revenue) = 0 THEN 'not available'
-            ELSE CAST(ROUND(
-                (MAX(revenue_last_invoice_date.revenue) - MAX(revenue_previous_day.revenue)) /
-                MAX(revenue_previous_day.revenue) * 100, 2) AS VARCHAR)
-        END, 'not available'
-    ) ||
-    '% from the last captured calculation. Overall its trend had been [' ||
-    STRING_AGG(CAST(revenue_last_7_days.revenue AS VARCHAR), ', ' ORDER BY revenue_last_7_days.day ASC) ||
-    '].' AS summary
+            WHEN MAX(revenue_previous_day.revenue) = 0 THEN NULL
+            ELSE (MAX(revenue_last_invoice_date.revenue) - MAX(revenue_previous_day.revenue)) /
+                 MAX(revenue_previous_day.revenue) * 100
+        END, 2
+    ) AS change,
+    LIST_AGG(revenue_last_7_days.revenue, ', ') WITHIN GROUP (ORDER BY revenue_last_7_days.day ASC) AS trend
 FROM 
     revenue_last_7_days,
     revenue_last_invoice_date,
     revenue_previous_day;
-
 
 {% endcache %}
 {% endreq %}
