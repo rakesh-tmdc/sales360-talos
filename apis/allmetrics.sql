@@ -45,11 +45,12 @@ SELECT
                  MAX(revenue_previous_day.revenue) * 100
         END, 2
     ) AS change,
-    GROUP_CONCAT(CAST(revenue_last_7_days.revenue AS VARCHAR) ORDER BY revenue_last_7_days.day ASC SEPARATOR ', ') AS trend
+    STRING_AGG(CAST(revenue_last_7_days.revenue AS VARCHAR), ', ' ORDER BY revenue_last_7_days.day ASC) AS trend
 FROM 
     revenue_last_7_days,
     revenue_last_invoice_date,
     revenue_previous_day;
+
 
 
 {% endcache %}
