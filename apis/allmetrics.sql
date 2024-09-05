@@ -1,5 +1,6 @@
 {% req summary %}
-{% cache %}WITH last_invoice AS (
+{% cache %}
+WITH last_invoice AS (
     SELECT 
         MAX(invoice_date) AS last_invoice_date
     FROM 
@@ -44,11 +45,12 @@ SELECT
                  MAX(revenue_previous_day.revenue) * 100
         END, 2
     ) AS change,
-    LIST_AGG(revenue_last_7_days.revenue, ', ') WITHIN GROUP (ORDER BY revenue_last_7_days.day ASC) AS trend
+    GROUP_CONCAT(CAST(revenue_last_7_days.revenue AS VARCHAR) ORDER BY revenue_last_7_days.day ASC SEPARATOR ', ') AS trend
 FROM 
     revenue_last_7_days,
     revenue_last_invoice_date,
     revenue_previous_day;
+
 
 {% endcache %}
 {% endreq %}
